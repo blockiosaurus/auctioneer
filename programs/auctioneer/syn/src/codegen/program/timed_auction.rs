@@ -5,8 +5,6 @@ use solana_program::clock::UnixTimestamp;
 
 pub fn generate(program: &Program) -> proc_macro2::TokenStream {
     quote! {
-        //anchor_lang::prelude::msg!("TA");
-
         pub fn timed_auction_initialize(ctx: Context<TimedAuctionInitialize>, start_time: UnixTimestamp, end_time: UnixTimestamp) -> Result<()> {
             let auction_timing_config = &mut ctx.accounts.config;
             auction_timing_config.start_time = start_time;

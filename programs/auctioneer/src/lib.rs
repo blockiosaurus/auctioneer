@@ -15,6 +15,7 @@ pub mod auctioneer {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        initialize_features();
         msg!("Test");
         Ok(())
     }
