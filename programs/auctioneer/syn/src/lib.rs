@@ -1,12 +1,12 @@
 use codegen::program as program_codegen;
 use parser::program as program_parser;
 
-use proc_macro2::{Span, TokenStream};
+use proc_macro2::{/*Span,*/ TokenStream};
 use quote::ToTokens;
-use syn::parse::{Error as ParseError, Parse, ParseStream, Result as ParseResult};
+use syn::parse::{/*Error as ParseError,*/ Parse, ParseStream, Result as ParseResult};
 use syn::{
-    Expr, Generics, Ident, ImplItemMethod, ItemEnum, ItemFn, ItemImpl, ItemMod, ItemStruct, LitInt,
-    LitStr, PatType, Token, TypePath,
+    /*Expr, Generics, ImplItemMethod, ItemEnum, ItemFn, ItemImpl,*/Ident, ItemMod, /*ItemStruct, LitInt,
+    LitStr, PatType, Token, TypePath,*/
 };
 
 pub mod codegen;

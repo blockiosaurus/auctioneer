@@ -1,5 +1,5 @@
 use crate::Program;
-use syn::parse::{Error as ParseError, Result as ParseResult};
+use syn::parse::{/*Error as ParseError,*/ Result as ParseResult};
 
 pub fn parse(program_mod: syn::ItemMod) -> ParseResult<Program> {
     //let state = state::parse(&program_mod)?;
