@@ -13,21 +13,16 @@ extern crate auctioneer_modules;
 
 use auctioneer_modules::auctioneer_modules;
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+//declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[auctioneer_modules(timed_auction)]
-#[program]
+//#[program]
 pub mod auctioneer {
     use super::*;
 
-    pub fn initialize(
-        ctx: Context<Initialize>,
-        //auctioneer_modules::feature_init_args!(),
-    ) -> ProgramResult {
-        let start_time: UnixTimestamp = 0;
-        let end_time: UnixTimestamp = 0;
-        initialize_features(ctx, start_time, end_time)?;
-        msg!("Test");
-        Ok(())
+    init_features!();
+
+    fn buy() {
+        timed_auction_assert_active()
     }
 }

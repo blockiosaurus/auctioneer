@@ -10,7 +10,7 @@ describe("auctioneer", () => {
 
   it("Is initialized!", async () => {
     // Add your test here.
-    const tx = await program.rpc.initialize({});
+    const tx = await program.rpc.initialize_features({});
     console.log("Your transaction signature", tx);
   });
 });

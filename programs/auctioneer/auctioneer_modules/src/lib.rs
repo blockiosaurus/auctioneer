@@ -71,22 +71,37 @@ fn generate_init(features: &Features) -> proc_macro2::TokenStream {
     }
 
     quote! {
-        pub fn initialize_features(
-            ctx: Context<Initialize>,
-            start_time: UnixTimestamp,
-            end_time: UnixTimestamp,
-        ) -> ProgramResult {
-            #timed_auction_code
+        macro_rules! init_features {
+            () => {
+                pub fn initialize_features(
+                    ctx: Context<Initialize>,
+                    start_time: UnixTimestamp,
+                    end_time: UnixTimestamp,
+                ) -> ProgramResult {
+                    #timed_auction_code
 
-            Ok(())
+                    Ok(())
+                }               
+            };
         }
     }
 }
 
 fn generate_init_accounts(features: &Features) -> proc_macro2::TokenStream {
     let mut timed_auction_code = quote!{};
+    let mut min_price = quote!{};
 
     if features.vars.contains(&Ident::new("timed_auction", Span::call_site())) {
+        timed_auction_code = quote! {
+            #[account(init, payer = signer, space = 8 + 8 + 8 + 1, seeds = [b"timed_auction", signer.key().as_ref()], bump)]
+            pub config: Account<'info, TimedAuctionConfig>,
+            #[account(mut)]
+            pub signer: Signer<'info>,
+            pub system_program: Program<'info, System>,
+        };
+    }
+
+    if features.vars.contains(&Ident::new("min_price", Span::call_site())) {
         timed_auction_code = quote! {
             #[account(init, payer = signer, space = 8 + 8 + 8 + 1, seeds = [b"timed_auction", signer.key().as_ref()], bump)]
             pub config: Account<'info, TimedAuctionConfig>,
@@ -102,6 +117,7 @@ fn generate_init_accounts(features: &Features) -> proc_macro2::TokenStream {
                 #[derive(Accounts)]
                 pub struct Initialize<'info> {
                     #timed_auction_code
+                    #min_price
                 }
         //    };
         //}

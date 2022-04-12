@@ -14,7 +14,7 @@ pub fn generate(_program: &Program) -> proc_macro2::TokenStream {
             auction_timing_config.start_time = start_time;
             auction_timing_config.end_time = end_time;
             auction_timing_config.bump = *ctx.bumps.get("config").unwrap();
-            
+
             Ok(())
         }
 
@@ -27,8 +27,8 @@ pub fn generate(_program: &Program) -> proc_macro2::TokenStream {
         //     pub system_program: Program<'info, System>,
         // }
 
-        #[account]
-        #[derive(Default)]
+        //#[account]
+        //#[derive(Default)]
         pub struct TimedAuctionConfig {
             start_time: UnixTimestamp,
             end_time: UnixTimestamp,
